@@ -6,7 +6,7 @@ import styles from './styles';
 const TextField = ({ term, placeHolder, OnTermChange, onValidateEmailAddress, error }) => {
   return (
     <View>
-      <Text style={styles.error}> {error}</Text>
+      <Text style={styles.ErrorText}> {error}</Text>
       <View style={styles.TextFieldView}>
         <TextInput
           autoCorrect={false}
