@@ -3,7 +3,7 @@ import { Dimensions, Platform } from 'react-native';
 const headerHeight = Platform.OS === 'ios' ? 66 : 46;
 const footerHeight = 55;
 
-const constants = {
+const Constants = {
   headerHeight: headerHeight,
   footerHeight: footerHeight,
   viewHeight: Dimensions.get('window').height - headerHeight,
@@ -11,4 +11,4 @@ const constants = {
   screenWidth: Dimensions.get('window').width
 };
 
-export default constants;
+export default Constants;
