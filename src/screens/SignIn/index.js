@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Alert, SafeAreaView, Image, KeyboardAvoidingView } from 'react-native';
 
-import String from '../../consts/String';
+import Strings from '../../consts/String';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 import PasswordTextField from '../../components/PasswordTextField';
@@ -23,6 +23,15 @@ const SignIn = () => {
       setState((prevState) => ({ ...prevState, emailError: '' }))
       : setState((prevState) => ({ ...prevState, emailError: Strings.InvalidEmailAddress }));
     return isValidEmail;
+  };
+
+  validatePasswordField = () => {
+    const isStrong = Utility.isPasswordStrong(password);
+
+    isStrong ?
+      setState((prevState) => ({ ...prevState, passwordError: '' }))
+      : setState((prevState) => ({ ...prevState, passwordError: Strings.PasswordNotStrong }));
+    return isStrong;
   };
 
   return (
