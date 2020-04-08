@@ -1,9 +1,9 @@
-import React from 'react'
-import { TextInput, Text, View } from 'react-native'
+import React from 'react';
+import { TextInput, Text, View } from 'react-native';
 
+import styles from './styles';
 
 const TextField = ({ term, placeHolder, OnTermChange, onValidateEmailAddress, error }) => {
-
   return (
     <View>
       <Text style={styles.error}> {error}</Text>

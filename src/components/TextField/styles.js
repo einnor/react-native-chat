@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import Color from '../utils/Colors';
-import Constants from '../const/Constants';
+import Color from '../../utils/Colors';
+import Constants from '../../consts/Constants';
 
 const styles = StyleSheet.create({
   TextField: {
