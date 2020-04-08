@@ -9,7 +9,6 @@ const Button = (props) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
       <Text style={[styles.text, textStyle]}> {title}</Text>
-
     </TouchableOpacity>
   );
 };
