@@ -9,6 +9,7 @@ import DismissKeyboard from '../../components/DismissKeyboard';
 import Utility from '../../utils/Utility';
 import Images from '../../consts/Images';
 import styles from './styles';
+import firebase from '../../firebase';
 
 const SignIn = () => {
   const [state, setState] = useState({
@@ -34,6 +35,32 @@ const SignIn = () => {
       setState((prevState) => ({ ...prevState, passwordError: '' }))
       : setState((prevState) => ({ ...prevState, passwordError: Strings.PasswordNotStrong }));
     return isStrong;
+  };
+
+  const submitToFirebase = (email, password) => {
+    try {
+      setState((prevState) => ({ ...prevState, isLoading: true }));
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((user) => {
+          setState((prevState) => ({ ...prevState, isLoading: false }));
+          Alert.alert('Logged In');
+        }).catch((error) => {
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((user) => {
+              setState((prevState) => ({ ...prevState, isLoading: false }));
+              Alert.alert('Create A New user');
+            })
+            .catch((error) => {
+              setState((prevState) => ({ ...prevState, isLoading: false }));
+              console.log('error');
+              Alert.alert(error.message)
+            });
+        });
+    } catch (error) {
+      setState((prevState) => ({ ...prevState, isLoading: false }));
+      Alert.alert(error.message);
+    }
   };
 
   const { email, password, emailError, passwordError } = state;
