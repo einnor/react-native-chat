@@ -9,4 +9,10 @@ export default class Utility {
     const isValid = expression.test(String(term).toLowerCase());
     return isValid;
   };
+
+  static isPasswordStrong = (password) => {
+    const expression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    const isStrong = expression.test(String(password));
+    return isStrong;
+  }
 };
