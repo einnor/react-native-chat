@@ -36,7 +36,7 @@ const SignIn = () => {
     return isStrong;
   };
 
-  cosnt { email, password, emailError, passwordError } = state;
+  const { email, password, emailError, passwordError } = state;
 
   return (
     <DismissKeyboard>
