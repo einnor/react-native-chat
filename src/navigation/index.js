@@ -39,10 +39,10 @@ const ChatFlow = () => {
   );
 };
 
-const mainStackNavigator = () => {
+const MainStackNavigator = () => {
   return (
     ChatFlow()
   );
 };
 
-export default mainStackNavigator;
+export default MainStackNavigator;
