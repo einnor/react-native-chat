@@ -37,6 +37,16 @@ const SignIn = () => {
     return isStrong;
   };
 
+  onSubmit = () =>{
+    const isValidEmail = validateEmailAddress();
+    const isPasswordStrong = validatePasswordField();
+
+    if(isValidEmail && isPasswordStrong){
+      setState((prevState) => ({ ...prevState, emailError: '', passwordError: '' }));
+      submitToFirebase(email, password);
+    }
+  };
+
   const submitToFirebase = (email, password) => {
     try {
       setState((prevState) => ({ ...prevState, isLoading: true }));
@@ -63,7 +73,7 @@ const SignIn = () => {
     }
   };
 
-  const { email, password, emailError, passwordError } = state;
+  const { email, password, emailError, passwordError, isLoading } = state;
 
   return (
     <DismissKeyboard>
@@ -85,7 +95,7 @@ const SignIn = () => {
               onTermChange={(txt) => setState((prevState) => ({ ...prevState, password: txt }))}
               onValidatePasswordField={validatePasswordField}
             />
-            <Button title={String.Join}></Button>
+            <Button title={String.Join} onPress={onSubmit} isLoading={isLoading}></Button>
           </SafeAreaView>
         </View>
       </KeyboardAvoidingView>
