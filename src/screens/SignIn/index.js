@@ -51,7 +51,13 @@ const SignIn = () => {
               OnTermChange={(txt) => setState((prevState) => ({ ...prevState, email: txt }))}
               onValidateEmailAddress={validateEmailAddress}
             />
-            <PasswordTextField />
+            <PasswordTextField
+              term={password}
+              error={passwordError}
+              placeHolder={Strings.PasswordPlaceHolder}
+              onTermChange={(txt) => setState((prevState) => ({ ...prevState, password: txt }))}
+              onValidatePasswordField={validatePasswordField}
+            />
             <Button title={String.Join}></Button>
           </SafeAreaView>
         </View>
