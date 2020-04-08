@@ -5,7 +5,9 @@ import Strings from '../../consts/String';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 import PasswordTextField from '../../components/PasswordTextField';
+import DismissKeyboard from '../../components/DismissKeyboard';
 import Utility from '../../utils/Utility';
+import Images from '../../consts/Images';
 import styles from './styles';
 
 const SignIn = () => {
@@ -34,13 +36,27 @@ const SignIn = () => {
     return isStrong;
   };
 
+  cosnt { email, password, emailError, passwordError } = state;
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text} > SignIn Screen</Text>
-      <Button title={String.Join}></Button>
-      <TextField />
-      <PasswordTextField />
-    </View>
+    <DismissKeyboard>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+        <View style={styles.container}>
+          <SafeAreaView>
+            <Image style={styles.logo} source={Images.logo} />
+            <TextField
+              term={email}
+              error={emailError}
+              placeHolder={Strings.EmailPlaceHolder}
+              OnTermChange={(txt) => setState((prevState) => ({ ...prevState, email: txt }))}
+              onValidateEmailAddress={validateEmailAddress}
+            />
+            <PasswordTextField />
+            <Button title={String.Join}></Button>
+          </SafeAreaView>
+        </View>
+      </KeyboardAvoidingView>
+    </DismissKeyboard>
   )
 };
 
