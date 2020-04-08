@@ -54,12 +54,12 @@ const SignIn = () => {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
           setState((prevState) => ({ ...prevState, isLoading: false }));
-          Alert.alert('Logged In');
+          Alert.alert('Successfully logged in');
         }).catch((error) => {
           firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
               setState((prevState) => ({ ...prevState, isLoading: false }));
-              Alert.alert('Create A New user');
+              Alert.alert('Successfully created a new user');
             })
             .catch((error) => {
               setState((prevState) => ({ ...prevState, isLoading: false }));
@@ -85,7 +85,7 @@ const SignIn = () => {
               term={email}
               error={emailError}
               placeHolder={Strings.EmailPlaceHolder}
-              OnTermChange={(txt) => setState((prevState) => ({ ...prevState, email: txt }))}
+              OnTermChange={(txt) => setState((prevState) => ({ ...prevState, email: txt.toLowerCase() }))}
               onValidateEmailAddress={validateEmailAddress}
             />
             <PasswordTextField
