@@ -6,7 +6,7 @@ import Button from '../../components/Button';
 import Strings from '../../consts/String';
 import styles from './styles';
 
-const AddGroup = () => {
+const AddGroup = ({ navigation }) => {
   const [state, setState] = useState({
     name: '',
     error: '',
@@ -46,6 +46,19 @@ const AddGroup = () => {
       setState((prevState) => ({ ...prevState, isLoading: false }));
       console.error('error adding document: ', error);
     });
+  };
+
+  addMembersOfChatToFirebase = (groupId, userID) => {
+    const membersRef = firestore.collection('members').doc(groupId).collection('member').doc();
+    membersRef.set({
+      userID: userID,
+    }).then((docRef) => {
+      navigation.goBack();
+    })
+      .catch((error) => {
+        setState((prevState) => ({ ...prevState, isLoading: false }));
+        console.error('Error adding document: ', error);
+      });
   };
 
   const { name, error, isLoading } = state;
