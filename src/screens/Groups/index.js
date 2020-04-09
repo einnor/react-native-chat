@@ -2,14 +2,40 @@ import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 
 import GroupItem from '../../components/GroupItem';
+import { firestore } from 'firebase';
 import styles from './styles';
 
 const Groups = ({ navigation }) => {
   const [groups, setGroups] = useState([]);
 
+  fetchGroups = () => {
+    const db = firestore;
+    const groupArray = [];
+
+    db.collection('groups')
+      .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type == 'added') {
+            console.log('New Group: ', change.doc.data());
+            groupArray.push(change.doc.data());
+          }
+          if (change.type === 'modified') {
+            console.log('Modified Group: ', change.doc.data());
+          }
+          if (change.type === 'removed') {
+            console.log('Removed Group: ', change.doc.data());
+          }
+
+          setGroups(groupArray);
+        });
+      });
+  };
+
+
   navigateToChatScreen = (item) => {
     navigation.navigate('Chat Screen', { item })
-  }
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
