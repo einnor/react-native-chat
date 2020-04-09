@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 
 import GroupItem from '../../components/GroupItem';
+import ButtonWithImage from '../../components/ButtonWithImage';
 import { firestore } from 'firebase';
 import styles from './styles';
 
@@ -34,6 +35,26 @@ const Groups = ({ navigation }) => {
   useEffect(() => {
     fetchGroups();
   }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <ButtonWithImage onPress={() => {
+          navigation.navigate('Add Group Screen')
+        }}
+          image={Images.add}
+        />
+      ),
+      headerLeft: () => {
+        <ButtonWithImage onPress={() => {
+
+        }}
+          image={Images.add}
+        />
+      }
+    })
+
+  })
 
 
   navigateToChatScreen = (item) => {
