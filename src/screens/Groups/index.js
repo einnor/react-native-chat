@@ -33,7 +33,7 @@ const Groups = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fetchGroups();
+    // fetchGroups();
   }, []);
 
   useLayoutEffect(() => {
