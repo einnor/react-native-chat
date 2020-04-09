@@ -11,7 +11,7 @@ import Images from '../../consts/Images';
 import styles from './styles';
 import firebase from '../../firebase';
 
-const SignIn = () => {
+const SignIn = ({ navigation }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -37,6 +37,13 @@ const SignIn = () => {
     return isStrong;
   };
 
+  navigateToGroups = () => {
+    navigation.reset({
+      index: 0,
+      routes:  [{ name: 'Groups Screen' }],
+    });
+  };
+
   onSubmit = () =>{
     const isValidEmail = validateEmailAddress();
     const isPasswordStrong = validatePasswordField();
@@ -54,12 +61,14 @@ const SignIn = () => {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
           setState((prevState) => ({ ...prevState, isLoading: false }));
-          Alert.alert('Successfully logged in');
+          // Alert.alert('Successfully logged in');
+          navigateToGroups();
         }).catch((error) => {
           firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
               setState((prevState) => ({ ...prevState, isLoading: false }));
-              Alert.alert('Successfully created a new user');
+              // Alert.alert('Successfully created a new user');
+              navigateToGroups();
             })
             .catch((error) => {
               setState((prevState) => ({ ...prevState, isLoading: false }));
