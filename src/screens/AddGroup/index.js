@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
 
+import TextField from '../../components/TextField';
+import Strings from '../../consts/String';
 import styles from './styles';
 
 const AddGroup = () => {
@@ -18,9 +20,17 @@ const AddGroup = () => {
     return isValidField;
   };
 
+  const { name, error, isLoading } = state;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text} > Add Group</Text>
+      <TextField
+        term={name}
+        error={error}
+        placeHolder={Strings.EnterYourGroupName}
+        OnTermChange={(txt) => setState((prevState) => ({ ...prevState, name: txt }))}
+        onValidateTextField={validateField}
+      />
     </View>
   );
 };
