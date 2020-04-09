@@ -31,6 +31,10 @@ const Groups = ({ navigation }) => {
       });
   };
 
+  useEffect(() => {
+    fetchGroups();
+  }, []);
+
 
   navigateToChatScreen = (item) => {
     navigation.navigate('Chat Screen', { item })
