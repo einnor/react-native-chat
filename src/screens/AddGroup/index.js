@@ -4,6 +4,8 @@ import { View, Alert } from 'react-native';
 import TextField from '../../components/TextField';
 import Button from '../../components/Button';
 import Strings from '../../consts/String';
+import Utility from '../../utils/Utility';
+import { firestore } from '../../firebase';
 import styles from './styles';
 
 const AddGroup = ({ navigation }) => {
@@ -14,9 +16,9 @@ const AddGroup = ({ navigation }) => {
   });
 
   validateField = () => {
-    const isValidField = Utility.isValidField(state.name)
+    const isValidField = Utility.isValidField(state.name);
     isValidField ?
-      setState((prevState) = ({ ...prevState, error: '' }))
+      setState((prevState) => ({ ...prevState, error: '' }))
       : setState((prevState) => ({ ...prevState, error: Strings.GroupNameEmpty }));
     return isValidField;
   };
