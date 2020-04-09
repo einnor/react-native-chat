@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
 
 import TextField from '../../components/TextField';
+import Button from '../../components/Button';
 import Strings from '../../consts/String';
 import styles from './styles';
 
@@ -20,6 +21,33 @@ const AddGroup = () => {
     return isValidField;
   };
 
+  onSubmit = () => {
+    const isValidField = validateField();
+    if (isValidField) {
+      saveGroup();
+    }
+  };
+
+  saveGroup = () => {
+    setState((prevState) => ({ ...prevState, isLoading: true }));
+    const groupsRef = firestore.collection('groups').doc();
+    const userID = firebase.auth().currentUser.uid;
+
+    groupsRef.set({
+      groupID: groupsRef.id,
+      groupName: groupName,
+      userID: userID,
+    }).then((docRef) => {
+      setState((prevState) => ({ ...prevState, isLoading: false }));
+      console.log('Document written with ID: ', groupsRef.id);
+      addMembersOfChatToFirebase(groupsRef.id, userID);
+    }).catch((error) => {
+      Alert.alert(error.message);
+      setState((prevState) => ({ ...prevState, isLoading: false }));
+      console.error('error adding document: ', error);
+    });
+  };
+
   const { name, error, isLoading } = state;
 
   return (
@@ -31,6 +59,7 @@ const AddGroup = () => {
         OnTermChange={(txt) => setState((prevState) => ({ ...prevState, name: txt }))}
         onValidateTextField={validateField}
       />
+      <Button title={Strings.CreateGroup} onPress={onSubmit} isLoading={isLoading} />
     </View>
   );
 };
