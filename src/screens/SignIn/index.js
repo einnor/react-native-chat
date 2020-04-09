@@ -95,7 +95,7 @@ const SignIn = ({ navigation }) => {
               error={emailError}
               placeHolder={Strings.EmailPlaceHolder}
               OnTermChange={(txt) => setState((prevState) => ({ ...prevState, email: txt.toLowerCase() }))}
-              onValidateEmailAddress={validateEmailAddress}
+              onValidateTextField={validateEmailAddress}
             />
             <PasswordTextField
               term={password}

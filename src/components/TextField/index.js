@@ -3,7 +3,7 @@ import { TextInput, Text, View } from 'react-native';
 
 import styles from './styles';
 
-const TextField = ({ term, placeHolder, OnTermChange, onValidateEmailAddress, error }) => {
+const TextField = ({ term, placeHolder, OnTermChange, onValidateTextField, error }) => {
   return (
     <View>
       <Text style={styles.ErrorText}> {error}</Text>
@@ -14,7 +14,7 @@ const TextField = ({ term, placeHolder, OnTermChange, onValidateEmailAddress, er
           placeholder={placeHolder}
           value={term}
           onChangeText={OnTermChange}
-          onEndEditing={onValidateEmailAddress}
+          onEndEditing={onValidateTextField}
         />
       </View>
     </View>
