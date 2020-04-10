@@ -18,11 +18,11 @@ const ChatFlow = () => {
           component={SignInScreen}
           options={{ headerShown: false }}
         /> */}
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Groups Screen"
           component={GroupScreen}
           options={{ title: "Groups" }}
-        /> */}
+        />
         <Stack.Screen
           name="Add Group Screen"
           component={AddGroupScreen}

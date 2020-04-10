@@ -5,7 +5,7 @@ import TextField from '../../components/TextField';
 import Button from '../../components/Button';
 import Strings from '../../consts/String';
 import Utility from '../../utils/Utility';
-import { firestore } from '../../firebase';
+import firebase, { firestore } from '../../firebase';
 import styles from './styles';
 
 const AddGroup = ({ navigation }) => {

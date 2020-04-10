@@ -4,7 +4,7 @@ import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 import GroupItem from '../../components/GroupItem';
 import ButtonWithImage from '../../components/ButtonWithImage';
 import Images from '../../consts/Images';
-import { firestore } from 'firebase';
+import { firestore } from '../../firebase';
 import styles from './styles';
 
 const Groups = ({ navigation }) => {
