@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import GroupItem from '../../components/GroupItem';
 import ButtonWithImage from '../../components/ButtonWithImage';
@@ -10,7 +10,7 @@ import styles from './styles';
 const Groups = ({ navigation }) => {
   const [groups, setGroups] = useState([]);
 
-  fetchGroups = () => {
+  const fetchGroups = () => {
     const db = firestore;
     const groupArray = [];
 
@@ -52,7 +52,7 @@ const Groups = ({ navigation }) => {
     });
   });
 
-  navigateToChatScreen = (item) => {
+  const navigateToChatScreen = (item) => {
     navigation.navigate('Chat Screen', { item });
   };
 
@@ -63,7 +63,7 @@ const Groups = ({ navigation }) => {
         keyExtractor={(item, index) => `key-${index}`}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => navigateToChatScreen(item)}>
-            <GroupItem item={item}></GroupItem>
+            <GroupItem item={item} />
           </TouchableOpacity>
         )}
       />
