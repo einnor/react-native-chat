@@ -7,7 +7,13 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format-all": "prettier --write '**/*.js'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.7",
@@ -30,8 +36,11 @@
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
+    "husky": "^4.2.5",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.0.4",
+    "pretty-quick": "^2.0.1",
     "react-test-renderer": "16.11.0"
   },
   "jest": {

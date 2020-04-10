@@ -3,7 +3,13 @@ import { TextInput, Text, View } from 'react-native';
 
 import styles from './styles';
 
-const TextField = ({ term, placeHolder, OnTermChange, onValidateTextField, error }) => {
+const TextField = ({
+  term,
+  placeHolder,
+  OnTermChange,
+  onValidateTextField,
+  error,
+}) => {
   return (
     <View>
       <Text style={styles.ErrorText}> {error}</Text>

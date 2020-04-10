@@ -7,14 +7,14 @@ const styles = StyleSheet.create({
     width: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 10
+    margin: 10,
   },
   ImageIconStyle: {
     padding: 10,
     margin: 5,
     height: 25,
     width: 25,
-    resizeMode: 'stretch'
+    resizeMode: 'stretch',
   },
 });
 

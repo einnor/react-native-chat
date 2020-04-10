@@ -9,10 +9,7 @@ const ButtonWithImage = (props) => {
   return (
     <View style={[styles.button, style]}>
       <TouchableOpacity onPress={onPress}>
-        <Image
-          source={image}
-          style={styles.ImageIconStyle}
-        />
+        <Image source={image} style={styles.ImageIconStyle} />
       </TouchableOpacity>
     </View>
   );

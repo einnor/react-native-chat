@@ -7,17 +7,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ebebeb'
+    backgroundColor: '#ebebeb',
   },
   logo: {
     alignSelf: 'center',
-    margin: 0.04 * Constants.screenHeight
+    margin: 0.04 * Constants.screenHeight,
   },
   text: {
     color: '#101010',
     fontSize: 24,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;

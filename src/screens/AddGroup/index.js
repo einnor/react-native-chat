@@ -15,48 +15,60 @@ const AddGroup = ({ navigation }) => {
     isLoading: false,
   });
 
-  validateField = () => {
+  const validateField = () => {
     const isValidField = Utility.isValidField(state.name);
-    isValidField ?
-      setState((prevState) => ({ ...prevState, error: '' }))
-      : setState((prevState) => ({ ...prevState, error: Strings.GroupNameEmpty }));
+    isValidField
+      ? setState((prevState) => ({ ...prevState, error: '' }))
+      : setState((prevState) => ({
+          ...prevState,
+          error: Strings.GroupNameEmpty,
+        }));
     return isValidField;
   };
 
-  onSubmit = () => {
+  const onSubmit = () => {
     const isValidField = validateField();
     if (isValidField) {
       saveGroup();
     }
   };
 
-  saveGroup = () => {
+  const saveGroup = () => {
     setState((prevState) => ({ ...prevState, isLoading: true }));
     const groupsRef = firestore.collection('groups').doc();
     const userID = firebase.auth().currentUser.uid;
 
-    groupsRef.set({
-      groupID: groupsRef.id,
-      groupName: groupName,
-      userID: userID,
-    }).then((docRef) => {
-      setState((prevState) => ({ ...prevState, isLoading: false }));
-      console.log('Document written with ID: ', groupsRef.id);
-      addMembersOfChatToFirebase(groupsRef.id, userID);
-    }).catch((error) => {
-      Alert.alert(error.message);
-      setState((prevState) => ({ ...prevState, isLoading: false }));
-      console.error('error adding document: ', error);
-    });
+    groupsRef
+      .set({
+        groupID: groupsRef.id,
+        groupName: name,
+        userID: userID,
+      })
+      .then((docRef) => {
+        setState((prevState) => ({ ...prevState, isLoading: false }));
+        console.log('Document written with ID: ', groupsRef.id);
+        addMembersOfChatToFirebase(groupsRef.id, userID);
+      })
+      .catch((error) => {
+        Alert.alert(error.message);
+        setState((prevState) => ({ ...prevState, isLoading: false }));
+        console.error('error adding document: ', error);
+      });
   };
 
-  addMembersOfChatToFirebase = (groupId, userID) => {
-    const membersRef = firestore.collection('members').doc(groupId).collection('member').doc();
-    membersRef.set({
-      userID: userID,
-    }).then((docRef) => {
-      navigation.goBack();
-    })
+  const addMembersOfChatToFirebase = (groupId, userID) => {
+    const membersRef = firestore
+      .collection('members')
+      .doc(groupId)
+      .collection('member')
+      .doc();
+    membersRef
+      .set({
+        userID: userID,
+      })
+      .then((docRef) => {
+        navigation.goBack();
+      })
       .catch((error) => {
         setState((prevState) => ({ ...prevState, isLoading: false }));
         console.error('Error adding document: ', error);
@@ -71,10 +83,16 @@ const AddGroup = ({ navigation }) => {
         term={name}
         error={error}
         placeHolder={Strings.EnterYourGroupName}
-        OnTermChange={(txt) => setState((prevState) => ({ ...prevState, name: txt }))}
+        OnTermChange={(txt) =>
+          setState((prevState) => ({ ...prevState, name: txt }))
+        }
         onValidateTextField={validateField}
       />
-      <Button title={Strings.CreateGroup} onPress={onSubmit} isLoading={isLoading} />
+      <Button
+        title={Strings.CreateGroup}
+        onPress={onSubmit}
+        isLoading={isLoading}
+      />
     </View>
   );
 };

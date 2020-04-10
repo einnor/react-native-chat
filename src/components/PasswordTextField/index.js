@@ -3,7 +3,13 @@ import { TextInput, Text, View } from 'react-native';
 
 import styles from './styles';
 
-const PasswordTextField = ({ term, placeHolder, onTermChange, onValidatePasswordField, error }) => {
+const PasswordTextField = ({
+  term,
+  placeHolder,
+  onTermChange,
+  onValidatePasswordField,
+  error,
+}) => {
   return (
     <View>
       <Text style={styles.ErrorText}>{error}</Text>

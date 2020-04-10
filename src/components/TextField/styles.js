@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   TextField: {
     fontSize: 14,
     flex: 1,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   TextFieldView: {
     height: Constants.screenHeight * 0.06,
@@ -17,14 +17,14 @@ const styles = StyleSheet.create({
     borderColor: Color.black,
     borderWidth: 1,
     justifyContent: 'center',
-    backgroundColor: Color.smoke
+    backgroundColor: Color.smoke,
   },
   ErrorText: {
     fontSize: 12,
     color: Color.red,
     marginBottom: -5,
     marginHorizontal: 20,
-  }
+  },
 });
 
 export default styles;

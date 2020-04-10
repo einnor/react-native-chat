@@ -8,7 +8,7 @@ const Constants = {
   footerHeight: footerHeight,
   viewHeight: Dimensions.get('window').height - headerHeight,
   screenHeight: Dimensions.get('window').height,
-  screenWidth: Dimensions.get('window').width
+  screenWidth: Dimensions.get('window').width,
 };
 
 export default Constants;

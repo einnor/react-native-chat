@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Alert, SafeAreaView, Image, KeyboardAvoidingView } from 'react-native';
+import {
+  View,
+  Text,
+  Alert,
+  SafeAreaView,
+  Image,
+  KeyboardAvoidingView,
+} from 'react-native';
 
 import Strings from '../../consts/String';
 import Button from '../../components/Button';
@@ -22,34 +29,44 @@ const SignIn = ({ navigation }) => {
 
   validateEmailAddress = () => {
     const isValidEmail = Utility.isEmailValid(email);
-    isValidEmail ?
-      setState((prevState) => ({ ...prevState, emailError: '' }))
-      : setState((prevState) => ({ ...prevState, emailError: Strings.InvalidEmailAddress }));
+    isValidEmail
+      ? setState((prevState) => ({ ...prevState, emailError: '' }))
+      : setState((prevState) => ({
+          ...prevState,
+          emailError: Strings.InvalidEmailAddress,
+        }));
     return isValidEmail;
   };
 
   validatePasswordField = () => {
     const isStrong = Utility.isPasswordStrong(password);
 
-    isStrong ?
-      setState((prevState) => ({ ...prevState, passwordError: '' }))
-      : setState((prevState) => ({ ...prevState, passwordError: Strings.PasswordNotStrong }));
+    isStrong
+      ? setState((prevState) => ({ ...prevState, passwordError: '' }))
+      : setState((prevState) => ({
+          ...prevState,
+          passwordError: Strings.PasswordNotStrong,
+        }));
     return isStrong;
   };
 
   navigateToGroups = () => {
     navigation.reset({
       index: 0,
-      routes:  [{ name: 'Groups Screen' }],
+      routes: [{ name: 'Groups Screen' }],
     });
   };
 
-  onSubmit = () =>{
+  onSubmit = () => {
     const isValidEmail = validateEmailAddress();
     const isPasswordStrong = validatePasswordField();
 
-    if(isValidEmail && isPasswordStrong){
-      setState((prevState) => ({ ...prevState, emailError: '', passwordError: '' }));
+    if (isValidEmail && isPasswordStrong) {
+      setState((prevState) => ({
+        ...prevState,
+        emailError: '',
+        passwordError: '',
+      }));
       submitToFirebase(email, password);
     }
   };
@@ -58,13 +75,18 @@ const SignIn = ({ navigation }) => {
     try {
       setState((prevState) => ({ ...prevState, isLoading: true }));
 
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
         .then((user) => {
           setState((prevState) => ({ ...prevState, isLoading: false }));
           // Alert.alert('Successfully logged in');
           navigateToGroups();
-        }).catch((error) => {
-          firebase.auth().createUserWithEmailAndPassword(email, password)
+        })
+        .catch((error) => {
+          firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
             .then((user) => {
               setState((prevState) => ({ ...prevState, isLoading: false }));
               // Alert.alert('Successfully created a new user');
@@ -73,7 +95,7 @@ const SignIn = ({ navigation }) => {
             .catch((error) => {
               setState((prevState) => ({ ...prevState, isLoading: false }));
               console.log('error');
-              Alert.alert(error.message)
+              Alert.alert(error.message);
             });
         });
     } catch (error) {
@@ -94,22 +116,32 @@ const SignIn = ({ navigation }) => {
               term={email}
               error={emailError}
               placeHolder={Strings.EmailPlaceHolder}
-              OnTermChange={(txt) => setState((prevState) => ({ ...prevState, email: txt.toLowerCase() }))}
+              OnTermChange={(txt) =>
+                setState((prevState) => ({
+                  ...prevState,
+                  email: txt.toLowerCase(),
+                }))
+              }
               onValidateTextField={validateEmailAddress}
             />
             <PasswordTextField
               term={password}
               error={passwordError}
               placeHolder={Strings.PasswordPlaceHolder}
-              onTermChange={(txt) => setState((prevState) => ({ ...prevState, password: txt }))}
+              onTermChange={(txt) =>
+                setState((prevState) => ({ ...prevState, password: txt }))
+              }
               onValidatePasswordField={validatePasswordField}
             />
-            <Button title={String.Join} onPress={onSubmit} isLoading={isLoading}></Button>
+            <Button
+              title={String.Join}
+              onPress={onSubmit}
+              isLoading={isLoading}></Button>
           </SafeAreaView>
         </View>
       </KeyboardAvoidingView>
     </DismissKeyboard>
-  )
+  );
 };
 
 export default SignIn;

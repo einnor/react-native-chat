@@ -4,12 +4,16 @@ import { TouchableOpacity, Text, ActivityIndicator, View } from 'react-native';
 import styles from './styles';
 
 const Button = (props) => {
-  const { title = 'Enter', style = {}, textStyle = {}, onPress, isLoading } = props;
+  const {
+    title = 'Enter',
+    style = {},
+    textStyle = {},
+    onPress,
+    isLoading,
+  } = props;
 
   const loader = () => {
-    return (
-      <ActivityIndicator animating={isLoading} />
-    );
+    return <ActivityIndicator animating={isLoading} />;
   };
 
   const button = () => (

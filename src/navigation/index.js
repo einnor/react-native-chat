@@ -21,28 +21,25 @@ const ChatFlow = () => {
         <Stack.Screen
           name="Groups Screen"
           component={GroupScreen}
-          options={{ title: "Groups" }}
+          options={{ title: 'Groups' }}
         />
         <Stack.Screen
           name="Add Group Screen"
           component={AddGroupScreen}
-          options={{ title: "Add Group" }}
+          options={{ title: 'Add Group' }}
         />
         <Stack.Screen
           name="Chat Screen"
           component={ChatScreen}
-          options={{ title: "Chats" }}
+          options={{ title: 'Chats' }}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 const MainStackNavigator = () => {
-  return (
-    ChatFlow()
-  );
+  return ChatFlow();
 };
 
 export default MainStackNavigator;

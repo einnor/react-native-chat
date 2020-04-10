@@ -6,7 +6,7 @@ import styles from './styles';
 const Chat = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text} > Chat Screen</Text>
+      <Text style={styles.text}> Chat Screen</Text>
     </View>
   );
 };

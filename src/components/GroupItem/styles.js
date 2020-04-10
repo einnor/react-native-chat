@@ -9,10 +9,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 50,
     width: Constants.screenWidth,
-    margin: 10
+    margin: 10,
   },
   descriptionContainer: {
-    margin: 5
+    margin: 5,
   },
   Image: {
     width: 40,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     shadowColor: Color.gray,
     shadowOffset: { height: 1, width: 1 },
     shadowRadius: 2,
-    backgroundColor: Color.theme
+    backgroundColor: Color.theme,
   },
   groupTitle: {
     color: Color.black,
@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
   },
   groupMembers: {
     color: Color.smoke,
-    fontSize: 14
+    fontSize: 14,
   },
   separator: {
     height: 0.5,
     width: Constants.width,
-    backgroundColor: Color.theme
+    backgroundColor: Color.theme,
   },
 });
 

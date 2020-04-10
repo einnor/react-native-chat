@@ -14,23 +14,22 @@ const Groups = ({ navigation }) => {
     const db = firestore;
     const groupArray = [];
 
-    db.collection('groups')
-      .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type == 'added') {
-            console.log('New Group: ', change.doc.data());
-            groupArray.push(change.doc.data());
-          }
-          if (change.type === 'modified') {
-            console.log('Modified Group: ', change.doc.data());
-          }
-          if (change.type === 'removed') {
-            console.log('Removed Group: ', change.doc.data());
-          }
+    db.collection('groups').onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type == 'added') {
+          console.log('New Group: ', change.doc.data());
+          groupArray.push(change.doc.data());
+        }
+        if (change.type === 'modified') {
+          console.log('Modified Group: ', change.doc.data());
+        }
+        if (change.type === 'removed') {
+          console.log('Removed Group: ', change.doc.data());
+        }
 
-          setGroups(groupArray);
-        });
+        setGroups(groupArray);
       });
+    });
   };
 
   useEffect(() => {
@@ -40,26 +39,21 @@ const Groups = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <ButtonWithImage onPress={() => {
-          navigation.navigate('Add Group Screen')
-        }}
+        <ButtonWithImage
+          onPress={() => {
+            navigation.navigate('Add Group Screen');
+          }}
           image={Images.add}
         />
       ),
       headerLeft: () => {
-        <ButtonWithImage onPress={() => {
-
-        }}
-          image={Images.add}
-        />
-      }
-    })
-
-  })
-
+        <ButtonWithImage onPress={() => {}} image={Images.add} />;
+      },
+    });
+  });
 
   navigateToChatScreen = (item) => {
-    navigation.navigate('Chat Screen', { item })
+    navigation.navigate('Chat Screen', { item });
   };
 
   return (
@@ -73,7 +67,7 @@ const Groups = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
-      <Text style={styles.text} > Groups Screen</Text>
+      <Text style={styles.text}> Groups Screen</Text>
     </View>
   );
 };

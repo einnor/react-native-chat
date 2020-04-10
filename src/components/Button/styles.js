@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textTransform: 'uppercase',
-    color: Color.white
-  }
+    color: Color.white,
+  },
 });
 
 export default styles;
