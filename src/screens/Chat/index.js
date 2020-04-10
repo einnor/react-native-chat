@@ -28,7 +28,7 @@ const Chat = ({ navigation, route }) => {
             if (doc.data() != null) {
               setState((prevState) => ({ ...prevState, isJoined: true }));
             } else {
-              setState((prevState) => ({ ...prevState, isJoined: true }));
+              setState((prevState) => ({ ...prevState, isJoined: false }));
               showAlertToJoinGroup();
             }
           });
@@ -59,6 +59,27 @@ const Chat = ({ navigation, route }) => {
       ],
       { cancelable: false },
     );
+  };
+
+  const joinGroup = () => {
+    const groupMemberRef = firestore
+      .collection('members')
+      .doc(item.groupID)
+      .collection('member')
+      .doc();
+    groupMemberRef
+      .set({
+        userID: userID,
+      })
+      .then(function (docRef) {
+        setState((prevState) => ({ ...prevState, isJoined: true }));
+        Alert.alert(Strings.joinMessage);
+        setMessage('');
+      })
+      .catch(function (error) {
+        setState((prevState) => ({ ...prevState, isJoined: false }));
+        Alert.alert(Strings.JoinGroupError);
+      });
   };
 
   useEffect(() => {
