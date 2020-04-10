@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 
 import firebase, { firestore } from '../../firebase';
+import Strings from '../../consts/String';
 import styles from './styles';
 
 const Chat = ({ navigation, route }) => {
@@ -38,6 +39,26 @@ const Chat = ({ navigation, route }) => {
       .catch((error) => {
         console.log('Error getting documents: ', error);
       });
+  };
+
+  const showAlertToJoinGroup = () => {
+    Alert.alert(
+      Strings.JoinChat,
+      Strings.JoinChatConfirmMessage,
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            joinGroup();
+          },
+        },
+        {
+          text: 'No',
+          onPress: () => {},
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   useEffect(() => {
