@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import firebase from '../firebase/Firebase';
+import firebase from '../../firebase';
 import styles from './styles';
 
 const MessageItem = ({ item }) => {

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import Constants from '../const/Constants';
-import Color from '../utils/Colors';
+import Constants from '../../consts/Constants';
+import Color from '../../utils/Colors';
 
 const styles = StyleSheet.create({
   othersMessageContainerView: {
