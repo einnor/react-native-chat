@@ -82,6 +82,30 @@ const Chat = ({ navigation, route }) => {
       });
   };
 
+  const getMessages = () => {
+    const db = firestore;
+    const messages = [];
+
+    db.collection('message')
+      .doc(item.groupID)
+      .collection('messages')
+      .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added') {
+            console.log('New Message: ', change.doc.data());
+            messages.push(change.doc.data());
+          }
+          if (change.type === 'modified') {
+            console.log('Modified Message', change.doc.data());
+          }
+          if (change.type === 'removed') {
+            console.log('Removed Message:', change.doc.data());
+          }
+          setState((prevState) => ({ ...prevState, messages }));
+        });
+      });
+  };
+
   useEffect(() => {
     getUserJoinedAlreadyOrNot();
     getMessages();
