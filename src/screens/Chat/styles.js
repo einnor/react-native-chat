@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
   messageFieldView: {
     flex: 0.1,
   },
+  keyboardAvoidingView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;
