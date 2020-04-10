@@ -106,6 +106,31 @@ const Chat = ({ navigation, route }) => {
       });
   };
 
+  const sendMessagesToChat = () => {
+    const messageRef = firestore
+      .collection('message')
+      .doc(item.groupID)
+      .collection('messages')
+      .doc();
+    const userEmail = firebase.auth().currentUser.email;
+
+    messageRef
+      .set({
+        messageID: messageRef.id,
+        message: message,
+        senderId: userID,
+        senderEmail: userEmail,
+      })
+      .then(function (docRef) {
+        console.log('Document written with ID: ', messageRef.id);
+        setState((prevState) => ({ ...prevState, message: '' }));
+      })
+      .catch((error) => {
+        Alert.alert(error.message);
+        console.log('Error:', error);
+      });
+  };
+
   useEffect(() => {
     getUserJoinedAlreadyOrNot();
     getMessages();
