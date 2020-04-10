@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Alert } from 'react-native';
+import {
+  View,
+  Alert,
+  KeyboardAvoidingView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 
+import DismissKeyboard from '../../components/DismissKeyboard';
+import MessageFieldView from '../../components/MessageFieldView';
+import MessageItem from '../../components/MessageItem';
 import firebase, { firestore } from '../../firebase';
 import Strings from '../../consts/String';
 import styles from './styles';
@@ -117,11 +126,11 @@ const Chat = ({ navigation, route }) => {
     messageRef
       .set({
         messageID: messageRef.id,
-        message: message,
+        message: state.message,
         senderId: userID,
         senderEmail: userEmail,
       })
-      .then(function (docRef) {
+      .then((docRef) => {
         console.log('Document written with ID: ', messageRef.id);
         setState((prevState) => ({ ...prevState, message: '' }));
       })
@@ -136,10 +145,39 @@ const Chat = ({ navigation, route }) => {
     getMessages();
   }, []);
 
+  const { messages, message } = state;
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}> Chat Screen</Text>
-    </View>
+    <DismissKeyboard>
+      <KeyboardAvoidingView
+        style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}
+        behavior="padding"
+        enabled={true}
+        keyboardVerticalOffset={100}>
+        <View style={styles.container}>
+          <FlatList
+            style={styles.flatList}
+            data={messages}
+            keyExtractor={(item, index) => `key-${index}`}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity onPress={() => {}}>
+                  <MessageItem item={item} />
+                </TouchableOpacity>
+              );
+            }}
+          />
+
+          <View style={styles.messageFieldView}>
+            <MessageFieldView
+              term={message}
+              placeHolder={Strings.typeYourMessage}
+              onTermChange={(message) => setMessage(message)}
+              onSubmit={sendMessagesToChat}></MessageFieldView>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </DismissKeyboard>
   );
 };
 
