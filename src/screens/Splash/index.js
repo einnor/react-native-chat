@@ -7,19 +7,20 @@ import styles from './styles';
 
 const Splash = ({ navigation }) => {
   useEffect(() => {
-    const { currentUser } = firebase.auth();
     setTimeout(() => {
-      if (currentUser !== null) {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Groups Screen' }],
-        });
-      } else {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'SignIn Screen' }],
-        });
-      }
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user !== null) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Groups Screen' }],
+          });
+        } else {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'SignIn Screen' }],
+          });
+        }
+      });
     }, 1000);
   }, [navigation]);
 
