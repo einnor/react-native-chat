@@ -12,6 +12,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  flatList: {
+    marginBottom: 10,
+    flex: 0.9,
+  },
+  messageFieldView: {
+    flex: 0.1,
+  },
 });
 
 export default styles;
