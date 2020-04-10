@@ -4,7 +4,7 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import GroupItem from '../../components/GroupItem';
 import ButtonWithImage from '../../components/ButtonWithImage';
 import Images from '../../consts/Images';
-import { firestore } from '../../firebase';
+import firebase, { firestore } from '../../firebase';
 import styles from './styles';
 
 const Groups = ({ navigation }) => {
@@ -47,10 +47,21 @@ const Groups = ({ navigation }) => {
         />
       ),
       headerLeft: () => {
-        <ButtonWithImage onPress={() => {}} image={Images.add} />;
+        const signOutUser = async () => {
+          try {
+            await firebase.auth().signOut();
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Splash Screen' }],
+            });
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        return <ButtonWithImage onPress={signOutUser} image={Images.logout} />;
       },
     });
-  });
+  }, [navigation]);
 
   const navigateToChatScreen = (item) => {
     navigation.navigate('Chat Screen', { item });
