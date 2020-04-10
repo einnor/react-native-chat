@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 
 import Images from '../../consts/Images';
 import firebase from '../../firebase';
