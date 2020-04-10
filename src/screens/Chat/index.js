@@ -71,12 +71,12 @@ const Chat = ({ navigation, route }) => {
       .set({
         userID: userID,
       })
-      .then(function (docRef) {
+      .then((docRef) => {
         setState((prevState) => ({ ...prevState, isJoined: true }));
         Alert.alert(Strings.joinMessage);
-        setMessage('');
+        setState((prevState) => ({ ...prevState, message: '' }));
       })
-      .catch(function (error) {
+      .catch((error) => {
         setState((prevState) => ({ ...prevState, isJoined: false }));
         Alert.alert(Strings.JoinGroupError);
       });
