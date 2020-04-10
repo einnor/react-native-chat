@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -150,7 +151,7 @@ const Chat = ({ navigation, route }) => {
   return (
     <DismissKeyboard>
       <KeyboardAvoidingView
-        style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}
+        style={styles.keyboardAvoidingView}
         behavior="padding"
         enabled={true}
         keyboardVerticalOffset={100}>
@@ -172,8 +173,11 @@ const Chat = ({ navigation, route }) => {
             <MessageFieldView
               term={message}
               placeHolder={Strings.typeYourMessage}
-              onTermChange={(message) => setMessage(message)}
-              onSubmit={sendMessagesToChat}></MessageFieldView>
+              onTermChange={(message) =>
+                setState((prevState) => ({ ...prevState, message }))
+              }
+              onSubmit={sendMessagesToChat}
+            />
           </View>
         </View>
       </KeyboardAvoidingView>
